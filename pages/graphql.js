@@ -23,8 +23,10 @@ function renderOptions(links) {
   return {
     renderNode: {
       [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
+        // find the entry in the entryBlockMap by ID
         const entry = entryBlockMap.get(node.data.target.sys.id);
 
+        // render the entry as needed
         if (entry.__typename === "CodeBlock") {
           return (
             <pre>
@@ -34,8 +36,10 @@ function renderOptions(links) {
         }
       },
       [BLOCKS.EMBEDDED_ASSET]: (node, next) => {
+        // find the asset in the assetBlockMap by ID
         const asset = assetBlockMap.get(node.data.target.sys.id);
 
+        // render the asset accordingly
         return (
           <img src={asset.url} height={asset.height} width={asset.width} alt={asset.description} />
         );

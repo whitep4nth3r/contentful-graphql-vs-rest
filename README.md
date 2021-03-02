@@ -2,6 +2,10 @@
 
 ## If you're using the Contentful Rich Text field in your content model, use this example code to check out how you can render linked assets inside the Rich Text field using both the REST API and GraphQL API
 
+## [⏭ Skip to REST API](#rest-api)
+
+## [⏭ Skip to GraphQL API](#graphql-api)
+
 ---
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
@@ -18,7 +22,7 @@ npm install
 yarn install
 ```
 
-At the root of your project, create an `.env.local` file and copy the contents from `.env.local.example`. This will provide you with a connection to an example Contentful space. [You can view the live example website for this space here.](https://nextjs-contentful-blog-starter.vercel.app/).
+At the root of your project, create an `.env.local` file and copy the contents from `.env.local.example`. This will provide you with a connection to an example Contentful space. [You can view the live example website for this space here.](https://nextjs-contentful-blog-starter.vercel.app/)
 
 ## Run the development server
 
@@ -34,7 +38,7 @@ Example code for the GraphQL API can be found in [pages/graphql](https://github.
 
 Example code for the REST API can be found in [pages/rest](https://github.com/whitep4nth3r/contentful-graphql-vs-rest/blob/main/pages/rest.js).
 
-API calls are executed at build time in `getStaticProps()` on each page. Read more about [getStaticProps() in Next.js.](https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation).
+API calls are executed at build time in `getStaticProps()` on each page. Read more about [getStaticProps() in Next.js.](https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation)
 
 Both code examples use [@contentful/rich-text-react-renderer](https://www.npmjs.com/package/@contentful/rich-text-react-renderer) to render the Rich Text field nodes to React components.
 
@@ -139,12 +143,15 @@ The code for the GraphQL API uses the [Fetch API](https://developer.mozilla.org/
  * Define all fields you want to query on the content type
  *
  * IMPORTANT:
- * `body.json` returns a node list (e.g. paragraphs, headings) that also includes REFERENCES nodes to assets and entries.
- * These reference nodes will not be returned with the full data set included from the GraphQL API.
- * To ensure you query the full asset/entry data, ensure you include the fields you want on the content types for the
- * linked entries and assets under body.links.entries, and body.links.assets.
+ * `body.json` returns a node list (e.g. paragraphs, headings) that also includes REFERENCE
+ * nodes to assets and entries.
  *
- * The example below shows how to query body.links.entries and body.links.assets for this particular content model.
+ * These reference nodes will not be returned with the full data set included from the GraphQL API.
+ * To ensure you query the full asset/entry data, ensure you include the fields you want on the
+ * content types for the linked entries and assets under body.links.entries, and body.links.assets.
+ *
+ * The example below shows how to query body.links.entries and body.links.assets for this particular
+ * content model.
  */
 
 export async function getStaticProps() {
@@ -189,7 +196,6 @@ export async function getStaticProps() {
   }`;
 
   // Construct the fetch options
-
   const fetchUrl = `https://graphql.contentful.com/content/v1/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}`;
 
   const fetchOptions = {
@@ -219,9 +225,11 @@ export async function getStaticProps() {
 
 ## GraphQL API: Rendering the Rich Text field
 
-The key difference in the GraphQL Api compared to the REST API is that linked entry nodes are available under `body.links` as opposed to their data being returned in line with with the other body nodes.
+The key difference in the GraphQL API compared to the REST API is that linked entry nodes are available under `body.links` as opposed to their data being returned in line with with the other body nodes.
 
 In order to target asset and entry data when rendering `BLOCKS.EMBEDDED_ENTRY` and `BLOCKS.EMBEDDED_ASSET` with `documentToReactComponents`, we can create an assetBlockMap (id: asset) and entryBlockMap (id: entry) to store data we can reference by ID.
+
+When the `renderOptions` reaches the entry and asset types, we can fetch the data from the maps we created at the top of the function, and render it accordingly.
 
 Note that the second parameter of `documentToReactComponents` is now a function, compared to an object in the REST example.
 
@@ -254,8 +262,10 @@ function renderOptions(links) {
       // other options...
 
       [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
+        // find the entry in the entryBlockMap by ID
         const entry = entryBlockMap.get(node.data.target.sys.id);
 
+        // render the entry as needed
         if (entry.__typename === "CodeBlock") {
           return (
             <pre>
@@ -265,8 +275,10 @@ function renderOptions(links) {
         }
       },
       [BLOCKS.EMBEDDED_ASSET]: (node, next) => {
+        // find the asset in the assetBlockMap by ID
         const asset = assetBlockMap.get(node.data.target.sys.id);
 
+        // render the asset accordingly
         return (
           <img src={asset.url} height={asset.height} width={asset.width} alt={asset.description} />
         );
