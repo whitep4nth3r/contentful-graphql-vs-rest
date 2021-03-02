@@ -9,9 +9,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <Link href="/graphql">GraphQL</Link>
-        <Link href="/rest">REST</Link>
+      <main className="container">
+        <Link href="/graphql">
+          <a className="home__link">View page generated via GraphQL API</a>
+        </Link>
+        <Link href="/rest">
+          <a className="home__link">View page generated via REST API</a>
+        </Link>
       </main>
     </>
   );

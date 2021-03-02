@@ -6,9 +6,13 @@ import { BLOCKS } from "@contentful/rich-text-types";
 //todo - is the sdk doing magic with the initial API response?
 // or is the raw API response formatted with embedded data for links as it is?
 
+// Create a bespoke renderOptions object to target BLOCKS.EMBEDDED_ENTRY (linked entries e.g. code blocks)
+// and BLOCKS.EMBEDDED_ASSET (linked assets e.g. images)
+
 const renderOptions = {
   renderNode: {
     [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
+      // target the contentType of the EMBEDDED_ENTRY to display as you need
       if (node.data.target.sys.contentType.sys.id === "codeBlock") {
         return (
           <pre>
@@ -18,6 +22,7 @@ const renderOptions = {
       }
     },
     [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
+      // render the EMBEDDED_ASSET as you need
       return (
         <img
           src={`https://${node.data.target.fields.file.url}`}
@@ -36,7 +41,7 @@ export default function Rest(props) {
   return (
     <>
       <Head>
-        <title>Contentful REST</title>
+        <title>Contentful REST API Example</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -46,23 +51,26 @@ export default function Rest(props) {
 }
 
 export async function getStaticProps() {
+  // Create the client with credentials
   const client = createClient({
     space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
     accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN,
   });
 
+  // Query the client with the following options
   const query = await client
     .getEntries({
       content_type: "blogPost",
       limit: 1,
       include: 10,
-      "fields.slug": "how-to-make-your-code-blocks-accessible-on-your-website",
+      "fields.slug": "the-power-of-the-contentful-rich-text-field",
     })
     .then((entry) => entry)
     .catch(console.error);
 
-  console.log(query.items[0]);
-
+  // As we are using getEntries we will receive an array
+  // The first item in the items array is passed to the page props
+  // as a post
   return {
     props: {
       post: query.items[0],

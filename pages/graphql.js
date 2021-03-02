@@ -2,6 +2,9 @@ import Head from "next/head";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 
+// Create a bespoke renderOptions object to target BLOCKS.EMBEDDED_ENTRY (linked entries e.g. code blocks)
+// and BLOCKS.EMBEDDED_ASSET (linked assets e.g. images)
+
 function renderOptions(links) {
   // create an asset block map
   const assetBlockMap = new Map();
@@ -47,7 +50,8 @@ export default function GraphQL(props) {
   return (
     <>
       <Head>
-        <title>Contentful GraphQL</title>
+        <title>Contentful GraphQL API Example</title>
+
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -56,35 +60,22 @@ export default function GraphQL(props) {
   );
 }
 
+/**
+ * Construct the GraphQL query
+ * Define all fields you want to query on the content type
+ *
+ * IMPORTANT:
+ * `body.json` returns a node list (e.g. paragraphs, headings) that also includes REFERENCES nodes to assets and entries.
+ * These reference nodes will not be returned with the full data set included from the GraphQL API.
+ * To ensure you query the full asset/entry data, ensure you include the fields you want on the content types for the
+ * linked entries and assets under body.links.entries, and body.links.assets.
+ *
+ * The example below shows how to query body.links.entries and body.links.assets for this particular content model.
+ */
+
 export async function getStaticProps() {
-  async function callContentful(query) {
-    const fetchUrl = `https://graphql.contentful.com/content/v1/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}`;
-
-    const fetchOptions = {
-      spaceID: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
-      accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN,
-      endpoint: fetchUrl,
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN,
-        "Content-Type": "application/json",
-      },
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
-      body: JSON.stringify({ query }),
-    };
-
-    try {
-      const data = await fetch(fetchUrl, fetchOptions).then((response) => response.json());
-      return data;
-    } catch (error) {
-      throw new Error("Could not fetch blog posts!");
-    }
-  }
-
   const query = `{
-    blogPostCollection(limit: 1, where: {slug: "how-to-make-your-code-blocks-accessible-on-your-website"}) {
-      total
+    blogPostCollection(limit: 1, where: {slug: "the-power-of-the-contentful-rich-text-field"}) {
       items {
         sys {
           id
@@ -129,7 +120,23 @@ export async function getStaticProps() {
     }
   }`;
 
-  const response = await callContentful(query);
+  // Construct the fetch options
+  const fetchUrl = `https://graphql.contentful.com/content/v1/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}`;
+
+  const fetchOptions = {
+    spaceID: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
+    accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN,
+    endpoint: fetchUrl,
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ query }),
+  };
+
+  // Make a call to fetch the data
+  const response = await fetch(fetchUrl, fetchOptions).then((response) => response.json());
   const post = response.data.blogPostCollection.items ? response.data.blogPostCollection.items : [];
 
   return {
