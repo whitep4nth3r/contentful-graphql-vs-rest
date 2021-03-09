@@ -66,7 +66,7 @@ The code for the REST API uses the [JavaScript Contentful SDK](https://www.conte
 
 ### Why use an SDK?
 
-The raw REST API response returns references to entries and assets, but does not bundle the data of those entries and assets with the response. The SDK does all the hard linking and data-fetching work for you via the `include` parameter in the request.
+The raw REST API response returns references to entries and assets, but does not bundle the data of those entries and assets with the response. The SDK does all the linking and data-fetching work for you via the `include` parameter in the request.
 
 [Read more about the include param on the Contentful docs](https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/links)
 
