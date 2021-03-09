@@ -1,6 +1,24 @@
-# Contentful GraphQL vs REST: fetching and rendering linked assets in the Rich Text field in React in two ways
+# Contentful GraphQL vs REST with JS SDK in Next.js: fetching and rendering linked assets in the Rich Text field in two ways
 
-## If you're using the Contentful Rich Text field in your content model, use this example code to check out how you can render linked assets inside the Rich Text field using both the REST API and GraphQL API
+If you're using the Contentful Rich Text field in your content model, use this example code to check out how you can render linked assets inside the Rich Text field using both the REST API with JavaScript SDK and GraphQL API.
+
+To see examples of the different raw responses in JSON from REST, REST with SDK and GraphQL, click on these links:
+
+- [REST raw](./example_resources/rest_raw.json)
+- [REST with SDK](./example_resources/rest_with_sdk.json)
+- [GraphQL](./example_resources/graphql.json)
+
+---
+
+## Key comparisons
+
+|                                                                        | REST (with JS SDK)              | GraphQL              |
+| ---------------------------------------------------------------------- | ------------------------------- | -------------------- |
+| Linked entries + assets returned in line with node list                | ✅                              | ❌                   |
+| Render Rich Text field nodes with @contentful/rich-text-react-renderer | ✅                              | ✅                   |
+| All fields of linked assets fetched by default                         | With 'include' param in request | Defined in GQL query |
+
+---
 
 ## [⏭ Skip to REST API](#rest-api)
 
@@ -45,6 +63,14 @@ Both code examples use [@contentful/rich-text-react-renderer](https://www.npmjs.
 ## REST API
 
 The code for the REST API uses the [JavaScript Contentful SDK](https://www.contentful.com/developers/docs/javascript/sdks/):
+
+### Why use an SDK?
+
+The raw REST API response returns links to entries and assets, but does not bundle the data of those entries and assets with the response. The SDK does all the hard linking and data-fetching work for you via the `include` parameter in the request.
+
+[Read more about the include param on the Contentful docs](https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/links)
+
+The `include` parameter is not applicable while retrieving a single entry; this is why this example uses `getEntries()` to demonstrate its use.
 
 ```js
 import { createClient } from "contentful";

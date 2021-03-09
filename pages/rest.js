@@ -71,6 +71,7 @@ export async function getStaticProps() {
   // As we are using getEntries we will receive an array
   // The first item in the items array is passed to the page props
   // as a post
+
   return {
     props: {
       post: query.items[0],
