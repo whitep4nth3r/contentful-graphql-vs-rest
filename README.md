@@ -4,9 +4,9 @@ If you're using the Contentful Rich Text field in your content model, use this e
 
 To see examples of the different raw responses in JSON from REST, REST with SDK and GraphQL, click on these links:
 
-- [REST raw](example_resources/rest_raw.json)
-- [REST with SDK](example_resources/rest_with_sdk.json)
-- [GraphQL](example_resources/graphql.json)
+- [REST raw](example_responses/rest_raw.json)
+- [REST with SDK](example_responses/rest_with_sdk.json)
+- [GraphQL](example_responses/graphql.json)
 
 ---
 
