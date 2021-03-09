@@ -1,0 +1,287 @@
+{
+  "sys": {
+    "space": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Space",
+        "id": "84zl5qdw0ore"
+      }
+    },
+    "id": "53PLFh5VLIotcvMqR6VsnO",
+    "type": "Entry",
+    "createdAt": "2021-02-25T14:46:56.646Z",
+    "updatedAt": "2021-03-02T14:05:34.353Z",
+    "environment": {
+      "sys": {
+        "id": "master",
+        "type": "Link",
+        "linkType": "Environment"
+      }
+    },
+    "revision": 3,
+    "contentType": {
+      "sys": {
+        "type": "Link",
+        "linkType": "ContentType",
+        "id": "blogPost"
+      }
+    },
+    "locale": "en-US"
+  },
+  "fields": {
+    "date": "2021-02-03T00:00+00:00",
+    "title": "The power of the Contentful Rich Text field",
+    "slug": "the-power-of-the-contentful-rich-text-field",
+    "author": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Entry",
+        "id": "556w2eIsidZbHaFES083x0"
+      }
+    },
+    "excerpt": "Explore how this starter blog renders image assets, video embeds, and code blocks in the body of the posts.",
+    "tags": ["rich text", "contentful"],
+    "body": {
+      "data": {},
+      "content": [
+        {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "marks": [],
+              "value": "Rich Text is a field type in Contentful that enables authors to create rich text content, similar to traditional \"What you see is what you get\" (wysiwyg) editors. Additionally, it allows entries and assets within your Contentful space to be linked dynamically and embedded within the flow of the text.",
+              "nodeType": "text"
+            }
+          ],
+          "nodeType": "paragraph"
+        },
+        {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "marks": [],
+              "value": "Here is a video entry embedded as an entry in the Rich Text field editor.",
+              "nodeType": "text"
+            }
+          ],
+          "nodeType": "paragraph"
+        },
+        {
+          "data": {
+            "target": {
+              "sys": {
+                "id": "5228EMw7XpxmDen9zgHyci",
+                "type": "Link",
+                "linkType": "Entry"
+              }
+            }
+          },
+          "content": [],
+          "nodeType": "embedded-entry-block"
+        },
+        {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "marks": [],
+              "value": "Here is an image asset.",
+              "nodeType": "text"
+            }
+          ],
+          "nodeType": "paragraph"
+        },
+        {
+          "data": {
+            "target": {
+              "sys": {
+                "id": "48tx2UTZfGBRiJZTo9z1kV",
+                "type": "Link",
+                "linkType": "Asset"
+              }
+            }
+          },
+          "content": [],
+          "nodeType": "embedded-asset-block"
+        },
+        {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "marks": [],
+              "value": "And here is a code block entry.",
+              "nodeType": "text"
+            }
+          ],
+          "nodeType": "paragraph"
+        },
+        {
+          "data": {
+            "target": {
+              "sys": {
+                "id": "59hJ3cbzJD6u4rN5zTVcxs",
+                "type": "Link",
+                "linkType": "Entry"
+              }
+            }
+          },
+          "content": [],
+          "nodeType": "embedded-entry-block"
+        },
+        {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "marks": [],
+              "value": "A look at the code",
+              "nodeType": "text"
+            }
+          ],
+          "nodeType": "heading-2"
+        },
+        {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "marks": [],
+              "value": "The Rich Text field is rendered via the ",
+              "nodeType": "text"
+            },
+            {
+              "data": {
+                "uri": "https://github.com/whitep4nth3r/nextjs-contentful-blog-starter/blob/main/components/RichTextPageContent/index.js"
+              },
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "RichTextPageContent component",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "hyperlink"
+            },
+            {
+              "data": {},
+              "marks": [],
+              "value": ", which uses the Contentful package ",
+              "nodeType": "text"
+            },
+            {
+              "data": {
+                "uri": "https://www.npmjs.com/package/@contentful/rich-text-react-renderer"
+              },
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "@contentful/rich-text-react-renderer.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "hyperlink"
+            },
+            {
+              "data": {},
+              "marks": [],
+              "value": " ",
+              "nodeType": "text"
+            }
+          ],
+          "nodeType": "paragraph"
+        },
+        {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "marks": [],
+              "value": "A common solution to rendering the embedded assets and entries inline with the Rich Text response in JavaScript is to create a map of the assets (",
+              "nodeType": "text"
+            },
+            {
+              "data": {},
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "value": "id: asset",
+              "nodeType": "text"
+            },
+            {
+              "data": {},
+              "marks": [],
+              "value": "), and find the asset to display in the map when rendering an asset block.",
+              "nodeType": "text"
+            }
+          ],
+          "nodeType": "paragraph"
+        },
+        {
+          "data": {
+            "target": {
+              "sys": {
+                "id": "1R2Kh2xE4XOibvX8kJsbgX",
+                "type": "Link",
+                "linkType": "Entry"
+              }
+            }
+          },
+          "content": [],
+          "nodeType": "embedded-entry-block"
+        },
+        {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "marks": [],
+              "value": "",
+              "nodeType": "text"
+            },
+            {
+              "data": {
+                "uri": "https://www.contentful.com/developers/docs/concepts/rich-text/"
+              },
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Take a look at the full Contentful Rich Text documentation from Contentful here.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "hyperlink"
+            },
+            {
+              "data": {},
+              "marks": [],
+              "value": "",
+              "nodeType": "text"
+            }
+          ],
+          "nodeType": "paragraph"
+        },
+        {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "marks": [],
+              "value": "",
+              "nodeType": "text"
+            }
+          ],
+          "nodeType": "paragraph"
+        }
+      ],
+      "nodeType": "document"
+    }
+  }
+}
