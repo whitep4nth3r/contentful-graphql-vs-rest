@@ -10,16 +10,6 @@ To see examples of the different raw responses in JSON from REST, REST with SDK 
 
 ---
 
-## Key comparisons
-
-|                                                                        | REST (with JS SDK)              | GraphQL              |
-| ---------------------------------------------------------------------- | ------------------------------- | -------------------- |
-| Linked entries + assets returned in line with node list                | ✅                              | ❌                   |
-| Render Rich Text field nodes with @contentful/rich-text-react-renderer | ✅                              | ✅                   |
-| All fields of linked assets fetched by default                         | With 'include' param in request | Defined in GQL query |
-
----
-
 ## [⏭ Skip to REST API](#rest-api)
 
 ## [⏭ Skip to GraphQL API](#graphql-api)
@@ -66,7 +56,7 @@ The code for the REST API uses the [JavaScript Contentful SDK](https://www.conte
 
 ### Why use an SDK?
 
-The raw REST API response returns references to entries and assets, but does not bundle the data of those entries and assets with the response. The SDK does all the linking and data-fetching work for you via the `include` parameter in the request.
+The raw REST API response returns references to entries and assets in your Rich Text field, but does not bundle the data of those entries and assets with the response. The SDK does all the linking and data-fetching work for you via the `include` parameter in the request.
 
 [Read more about the include param on the Contentful docs](https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/links)
 
