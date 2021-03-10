@@ -2,17 +2,23 @@
 
 If you're using the Contentful Rich Text field in your content model, use this example code to check out how you can render linked assets inside the Rich Text field using both the REST API with JavaScript SDK and GraphQL API.
 
-To see examples of the different raw responses in JSON from REST, REST with SDK and GraphQL, click on these links:
+## To see examples of the different raw responses in JSON from REST, REST with SDK and GraphQL, click on the links below
 
-- [REST raw](example_responses/rest_raw.json)
-- [REST with SDK](example_responses/rest_with_sdk.json)
-- [GraphQL](example_responses/graphql.json)
+### [View REST raw response](example_responses/rest_raw.json)
 
----
+Via the curl request:
 
-## [⏭ Skip to REST API](#rest-api)
+```curl
+https://cdn.contentful.com/spaces/{{spaceId}}/environments/master/entries?access_token={{accessToken}}&content_type=blogPost&include=10&fields.slug=the-power-of-the-contentful-rich-text-field
+```
 
-## [⏭ Skip to GraphQL API](#graphql-api)
+### [View REST with SDK response](example_responses/rest_with_sdk.json)
+
+[⏭ Skip to REST API example](#rest-api)
+
+### [View GraphQL response](example_responses/graphql.json)
+
+[⏭ Skip to GraphQL API example](#graphql-api)
 
 ---
 

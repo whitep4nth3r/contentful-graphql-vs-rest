@@ -1,287 +1,536 @@
 {
   "sys": {
-    "space": {
-      "sys": {
-        "type": "Link",
-        "linkType": "Space",
-        "id": "84zl5qdw0ore"
-      }
-    },
-    "id": "53PLFh5VLIotcvMqR6VsnO",
-    "type": "Entry",
-    "createdAt": "2021-02-25T14:46:56.646Z",
-    "updatedAt": "2021-03-02T14:05:34.353Z",
-    "environment": {
-      "sys": {
-        "id": "master",
-        "type": "Link",
-        "linkType": "Environment"
-      }
-    },
-    "revision": 3,
-    "contentType": {
-      "sys": {
-        "type": "Link",
-        "linkType": "ContentType",
-        "id": "blogPost"
-      }
-    },
-    "locale": "en-US"
+    "type": "Array"
   },
-  "fields": {
-    "date": "2021-02-03T00:00+00:00",
-    "title": "The power of the Contentful Rich Text field",
-    "slug": "the-power-of-the-contentful-rich-text-field",
-    "author": {
+  "total": 1,
+  "skip": 0,
+  "limit": 100,
+  "items": [
+    {
       "sys": {
-        "type": "Link",
-        "linkType": "Entry",
-        "id": "556w2eIsidZbHaFES083x0"
-      }
-    },
-    "excerpt": "Explore how this starter blog renders image assets, video embeds, and code blocks in the body of the posts.",
-    "tags": ["rich text", "contentful"],
-    "body": {
-      "data": {},
-      "content": [
-        {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "84zl5qdw0ore"
+          }
+        },
+        "id": "53PLFh5VLIotcvMqR6VsnO",
+        "type": "Entry",
+        "createdAt": "2021-02-25T14:46:56.646Z",
+        "updatedAt": "2021-03-02T14:05:34.353Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "revision": 3,
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "blogPost"
+          }
+        },
+        "locale": "en-US"
+      },
+      "fields": {
+        "date": "2021-02-03T00:00+00:00",
+        "title": "The power of the Contentful Rich Text field",
+        "slug": "the-power-of-the-contentful-rich-text-field",
+        "author": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "556w2eIsidZbHaFES083x0"
+          }
+        },
+        "excerpt": "Explore how this starter blog renders image assets, video embeds, and code blocks in the body of the posts.",
+        "tags": ["rich text", "contentful"],
+        "body": {
           "data": {},
           "content": [
             {
               "data": {},
-              "marks": [],
-              "value": "Rich Text is a field type in Contentful that enables authors to create rich text content, similar to traditional \"What you see is what you get\" (wysiwyg) editors. Additionally, it allows entries and assets within your Contentful space to be linked dynamically and embedded within the flow of the text.",
-              "nodeType": "text"
-            }
-          ],
-          "nodeType": "paragraph"
-        },
-        {
-          "data": {},
-          "content": [
-            {
-              "data": {},
-              "marks": [],
-              "value": "Here is a video entry embedded as an entry in the Rich Text field editor.",
-              "nodeType": "text"
-            }
-          ],
-          "nodeType": "paragraph"
-        },
-        {
-          "data": {
-            "target": {
-              "sys": {
-                "id": "5228EMw7XpxmDen9zgHyci",
-                "type": "Link",
-                "linkType": "Entry"
-              }
-            }
-          },
-          "content": [],
-          "nodeType": "embedded-entry-block"
-        },
-        {
-          "data": {},
-          "content": [
-            {
-              "data": {},
-              "marks": [],
-              "value": "Here is an image asset.",
-              "nodeType": "text"
-            }
-          ],
-          "nodeType": "paragraph"
-        },
-        {
-          "data": {
-            "target": {
-              "sys": {
-                "id": "48tx2UTZfGBRiJZTo9z1kV",
-                "type": "Link",
-                "linkType": "Asset"
-              }
-            }
-          },
-          "content": [],
-          "nodeType": "embedded-asset-block"
-        },
-        {
-          "data": {},
-          "content": [
-            {
-              "data": {},
-              "marks": [],
-              "value": "And here is a code block entry.",
-              "nodeType": "text"
-            }
-          ],
-          "nodeType": "paragraph"
-        },
-        {
-          "data": {
-            "target": {
-              "sys": {
-                "id": "59hJ3cbzJD6u4rN5zTVcxs",
-                "type": "Link",
-                "linkType": "Entry"
-              }
-            }
-          },
-          "content": [],
-          "nodeType": "embedded-entry-block"
-        },
-        {
-          "data": {},
-          "content": [
-            {
-              "data": {},
-              "marks": [],
-              "value": "A look at the code",
-              "nodeType": "text"
-            }
-          ],
-          "nodeType": "heading-2"
-        },
-        {
-          "data": {},
-          "content": [
-            {
-              "data": {},
-              "marks": [],
-              "value": "The Rich Text field is rendered via the ",
-              "nodeType": "text"
-            },
-            {
-              "data": {
-                "uri": "https://github.com/whitep4nth3r/nextjs-contentful-blog-starter/blob/main/components/RichTextPageContent/index.js"
-              },
               "content": [
                 {
                   "data": {},
                   "marks": [],
-                  "value": "RichTextPageContent component",
+                  "value": "Rich Text is a field type in Contentful that enables authors to create rich text content, similar to traditional \"What you see is what you get\" (wysiwyg) editors. Additionally, it allows entries and assets within your Contentful space to be linked dynamically and embedded within the flow of the text.",
                   "nodeType": "text"
                 }
               ],
-              "nodeType": "hyperlink"
+              "nodeType": "paragraph"
             },
             {
               "data": {},
-              "marks": [],
-              "value": ", which uses the Contentful package ",
-              "nodeType": "text"
-            },
-            {
-              "data": {
-                "uri": "https://www.npmjs.com/package/@contentful/rich-text-react-renderer"
-              },
               "content": [
                 {
                   "data": {},
                   "marks": [],
-                  "value": "@contentful/rich-text-react-renderer.",
+                  "value": "Here is a video entry embedded as an entry in the Rich Text field editor.",
                   "nodeType": "text"
                 }
               ],
-              "nodeType": "hyperlink"
-            },
-            {
-              "data": {},
-              "marks": [],
-              "value": " ",
-              "nodeType": "text"
-            }
-          ],
-          "nodeType": "paragraph"
-        },
-        {
-          "data": {},
-          "content": [
-            {
-              "data": {},
-              "marks": [],
-              "value": "A common solution to rendering the embedded assets and entries inline with the Rich Text response in JavaScript is to create a map of the assets (",
-              "nodeType": "text"
-            },
-            {
-              "data": {},
-              "marks": [
-                {
-                  "type": "code"
-                }
-              ],
-              "value": "id: asset",
-              "nodeType": "text"
-            },
-            {
-              "data": {},
-              "marks": [],
-              "value": "), and find the asset to display in the map when rendering an asset block.",
-              "nodeType": "text"
-            }
-          ],
-          "nodeType": "paragraph"
-        },
-        {
-          "data": {
-            "target": {
-              "sys": {
-                "id": "1R2Kh2xE4XOibvX8kJsbgX",
-                "type": "Link",
-                "linkType": "Entry"
-              }
-            }
-          },
-          "content": [],
-          "nodeType": "embedded-entry-block"
-        },
-        {
-          "data": {},
-          "content": [
-            {
-              "data": {},
-              "marks": [],
-              "value": "",
-              "nodeType": "text"
+              "nodeType": "paragraph"
             },
             {
               "data": {
-                "uri": "https://www.contentful.com/developers/docs/concepts/rich-text/"
+                "target": {
+                  "sys": {
+                    "id": "5228EMw7XpxmDen9zgHyci",
+                    "type": "Link",
+                    "linkType": "Entry"
+                  }
+                }
               },
+              "content": [],
+              "nodeType": "embedded-entry-block"
+            },
+            {
+              "data": {},
               "content": [
                 {
                   "data": {},
                   "marks": [],
-                  "value": "Take a look at the full Contentful Rich Text documentation from Contentful here.",
+                  "value": "Here is an image asset.",
                   "nodeType": "text"
                 }
               ],
-              "nodeType": "hyperlink"
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {
+                "target": {
+                  "sys": {
+                    "id": "48tx2UTZfGBRiJZTo9z1kV",
+                    "type": "Link",
+                    "linkType": "Asset"
+                  }
+                }
+              },
+              "content": [],
+              "nodeType": "embedded-asset-block"
             },
             {
               "data": {},
-              "marks": [],
-              "value": "",
-              "nodeType": "text"
-            }
-          ],
-          "nodeType": "paragraph"
-        },
-        {
-          "data": {},
-          "content": [
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "And here is a code block entry.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {
+                "target": {
+                  "sys": {
+                    "id": "59hJ3cbzJD6u4rN5zTVcxs",
+                    "type": "Link",
+                    "linkType": "Entry"
+                  }
+                }
+              },
+              "content": [],
+              "nodeType": "embedded-entry-block"
+            },
             {
               "data": {},
-              "marks": [],
-              "value": "",
-              "nodeType": "text"
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "A look at the code",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "heading-2"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "The Rich Text field is rendered via the ",
+                  "nodeType": "text"
+                },
+                {
+                  "data": {
+                    "uri": "https://github.com/whitep4nth3r/nextjs-contentful-blog-starter/blob/main/components/RichTextPageContent/index.js"
+                  },
+                  "content": [
+                    {
+                      "data": {},
+                      "marks": [],
+                      "value": "RichTextPageContent component",
+                      "nodeType": "text"
+                    }
+                  ],
+                  "nodeType": "hyperlink"
+                },
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": ", which uses the Contentful package ",
+                  "nodeType": "text"
+                },
+                {
+                  "data": {
+                    "uri": "https://www.npmjs.com/package/@contentful/rich-text-react-renderer"
+                  },
+                  "content": [
+                    {
+                      "data": {},
+                      "marks": [],
+                      "value": "@contentful/rich-text-react-renderer.",
+                      "nodeType": "text"
+                    }
+                  ],
+                  "nodeType": "hyperlink"
+                },
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": " ",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "A common solution to rendering the embedded assets and entries inline with the Rich Text response in JavaScript is to create a map of the assets (",
+                  "nodeType": "text"
+                },
+                {
+                  "data": {},
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "value": "id: asset",
+                  "nodeType": "text"
+                },
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "), and find the asset to display in the map when rendering an asset block.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {
+                "target": {
+                  "sys": {
+                    "id": "1R2Kh2xE4XOibvX8kJsbgX",
+                    "type": "Link",
+                    "linkType": "Entry"
+                  }
+                }
+              },
+              "content": [],
+              "nodeType": "embedded-entry-block"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "",
+                  "nodeType": "text"
+                },
+                {
+                  "data": {
+                    "uri": "https://www.contentful.com/developers/docs/concepts/rich-text/"
+                  },
+                  "content": [
+                    {
+                      "data": {},
+                      "marks": [],
+                      "value": "Take a look at the full Contentful Rich Text documentation from Contentful here.",
+                      "nodeType": "text"
+                    }
+                  ],
+                  "nodeType": "hyperlink"
+                },
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
             }
           ],
-          "nodeType": "paragraph"
+          "nodeType": "document"
         }
-      ],
-      "nodeType": "document"
+      }
     }
+  ],
+  "includes": {
+    "Entry": [
+      {
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "84zl5qdw0ore"
+            }
+          },
+          "id": "1R2Kh2xE4XOibvX8kJsbgX",
+          "type": "Entry",
+          "createdAt": "2021-02-25T15:01:43.059Z",
+          "updatedAt": "2021-02-25T15:08:07.368Z",
+          "environment": {
+            "sys": {
+              "id": "master",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 2,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "codeBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "description": "Rich text embedded entries and assets example",
+          "language": "javascript",
+          "code": "import { documentToReactComponents } from '@contentful/rich-text-react-renderer';\nimport { BLOCKS } from \"@contentful/rich-text-types\";\n\n// Create a bespoke getRenderOptions function\n\nfunction getRenderOptions(links) {\n\n  // create an asset block map\n\n  const assetBlockMap = new Map();\n\n  // loop through the assets and add them to the map\n\n  for (const asset of links.assets.block) {\n    assetBlockMap.set(asset.sys.id, asset);\n  }\n\n  // create an entry block map\n\n  const entryBlockMap = new Map();\n\n  // loop through the entries and add them to the map\n\n  for (const entry of links.entries.block) {\n    entryBlockMap.set(asset.sys.id, entry);\n  }\n\n  return {\n    renderNode: {\n\n      // ... other options ...\n\n      [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {\n\n        // Find your entry in the map\n\n        const entry = entryBlockMap.get(\n          node.data.target.sys.id,\n        );\n\n        switch (entry.__typename) {\n          case \"VideoEmbed\":\n            const { embedUrl, title } = entry;\n\n            // Here we render our video embed component(s)\n\n            return <DynamicVideoEmbed embedUrl={embedUrl} title={title} />;\n\n          case \"CodeBlock\":\n            const { language, code } = entry;\n\n             // Here we render our code block components(s)\n\n            return <DynamicCodeBlock language={language} code={code} />;\n          default:\n            return null;\n        }\n      },\n      [BLOCKS.EMBEDDED_ASSET]: (node, next) => {\n\n        // Find your asset in the map\n\n        const asset = assetBlockMap.get(\n          node.data.target.sys.id,\n        );\n\n        return (\n\n          // Your component/HTML with the data from the asset\n\n        );\n      },\n    }\n  }\n\n// Render your Rich Text content in the DOM\n\nexport default function MyComponent({ richTextResponse }) {\n  return (\n    <>\n      {documentToReactComponents(richTextResponse.json, getRenderOptions(richTextResponse.links));}\n    </>\n  )\n}"
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "84zl5qdw0ore"
+            }
+          },
+          "id": "5228EMw7XpxmDen9zgHyci",
+          "type": "Entry",
+          "createdAt": "2021-02-25T14:45:06.087Z",
+          "updatedAt": "2021-02-25T14:48:11.455Z",
+          "environment": {
+            "sys": {
+              "id": "master",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 2,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "videoEmbed"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Example video embed",
+          "embedUrl": "https://www.youtube.com/embed/97Hg0OYFC0w"
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "84zl5qdw0ore"
+            }
+          },
+          "id": "556w2eIsidZbHaFES083x0",
+          "type": "Entry",
+          "createdAt": "2021-03-02T14:05:17.499Z",
+          "updatedAt": "2021-03-02T15:11:34.145Z",
+          "environment": {
+            "sys": {
+              "id": "master",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 3,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "person"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "image": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Asset",
+              "id": "rImaN1nOhnl7aJ4OYwbOp"
+            }
+          },
+          "name": "Salma Alam-Naylor",
+          "description": "Salma is a human being, musician, teacher, and frontend fanatic with a fierce mission to promote accessibility and inclusivity in technology on planet earth. Her favourite colour is black, and she’ll always remind you to build stuff, learn things and love what you do.",
+          "twitterUsername": "whitep4nth3r",
+          "gitHubUsername": "whitep4nth3r",
+          "twitchUsername": "whitep4nth3r",
+          "websiteUrl": "https://whitep4nth3r.com"
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "84zl5qdw0ore"
+            }
+          },
+          "id": "59hJ3cbzJD6u4rN5zTVcxs",
+          "type": "Entry",
+          "createdAt": "2021-02-25T14:46:41.479Z",
+          "updatedAt": "2021-02-25T14:46:41.479Z",
+          "environment": {
+            "sys": {
+              "id": "master",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "codeBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "description": "Example code block",
+          "language": "javascript",
+          "code": "/*\n * Format a blog post published date for a human to read.\n * Output is e.g. 16 Feb 2020\n */\n\nexport function formatPublishedDateForDisplay(dateString) {\n  const timestamp = Date.parse(dateString);\n  const date = new Date(timestamp);\n  return `${date.getDate()} ${getMonthStringFromInt(\n    date.getMonth(),\n  )} ${date.getFullYear()}`;\n}"
+        }
+      }
+    ],
+    "Asset": [
+      {
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "84zl5qdw0ore"
+            }
+          },
+          "id": "48tx2UTZfGBRiJZTo9z1kV",
+          "type": "Asset",
+          "createdAt": "2021-02-25T10:34:09.130Z",
+          "updatedAt": "2021-02-25T10:34:09.130Z",
+          "environment": {
+            "sys": {
+              "id": "master",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "jeremy-thomas-colourful-galaxy-unsplash",
+          "description": "Blue and purple galaxy digital wallpaper",
+          "file": {
+            "url": "//images.ctfassets.net/84zl5qdw0ore/48tx2UTZfGBRiJZTo9z1kV/166c8a82c58b5dd48ac5626e03da4395/jeremy-thomas-E0AHdsENmDg-unsplash.jpg",
+            "details": {
+              "size": 3871388,
+              "image": {
+                "width": 5005,
+                "height": 3417
+              }
+            },
+            "fileName": "jeremy-thomas-E0AHdsENmDg-unsplash.jpg",
+            "contentType": "image/jpeg"
+          }
+        }
+      },
+      {
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "84zl5qdw0ore"
+            }
+          },
+          "id": "rImaN1nOhnl7aJ4OYwbOp",
+          "type": "Asset",
+          "createdAt": "2021-03-02T14:05:10.032Z",
+          "updatedAt": "2021-03-02T14:05:10.032Z",
+          "environment": {
+            "sys": {
+              "id": "master",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "salma",
+          "description": "A headshot of Salma wearing black on a red patterned background.",
+          "file": {
+            "url": "//images.ctfassets.net/84zl5qdw0ore/rImaN1nOhnl7aJ4OYwbOp/02b40d85b22b843a1b84044d8e7087d2/salma_headshot.png",
+            "details": {
+              "size": 8068316,
+              "image": {
+                "width": 2681,
+                "height": 2681
+              }
+            },
+            "fileName": "salma_headshot.png",
+            "contentType": "image/png"
+          }
+        }
+      }
+    ]
   }
 }
