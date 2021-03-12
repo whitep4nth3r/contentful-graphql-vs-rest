@@ -135,7 +135,7 @@ You can also use a Contentful SDK, such as the [JavaScript SDK](https://www.cont
 
 Under the hood, the JavaScript SDK uses the [`contentful-resolve-response`](https://github.com/contentful/contentful-resolve-response) package, which converts the raw nodes into a nice rich tree of data.
 
-The one limitation is that the `contentful-resolve-response` will resolve linked entries up to a maximum of 10 levels deep.
+The one limitation is that `contentful-resolve-response` will resolve linked entries up to a maximum of 10 levels deep.
 
 _Note: The `include` parameter is not applicable while retrieving a single entry; this is why this example uses `getEntries()` to demonstrate its use._
 
@@ -171,10 +171,13 @@ To visualise this in an object graph:
 {
   "blogPost": {
     //...
-    "author": {
+    "fields": {
       //...
-      "location": {
+      "author": {
         //...
+        "location": {
+          //...
+        }
       }
     }
   }
@@ -206,7 +209,7 @@ If your `blogPost` had another top level reference, say a `heroBanner`:
 
 `includes=1` would return both the `author` and `heroBanner` inside the `includes` array.
 
-Regardless of the `include` depth you specify, the SDK, which uses the `contentful-resolve-response` package, which link all entries and assets that are returned in the `includes` response.
+Regardless of the `include` depth you specify, the SDK, which uses the `contentful-resolve-response` package, will link all entries and assets that are returned in the `includes` response.
 
 [Read more about the include param on the Contentful docs](https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/links)
 
@@ -287,45 +290,45 @@ The code for the GraphQL API uses the [Fetch API](https://developer.mozilla.org/
  */
 
 export async function getStaticProps() {
-  const query = `{
-    blogPostCollection(limit: 1, where: {slug: "the-power-of-the-contentful-rich-text-field"}) {
-      items {
-        date
-        title
-        slug
-        body {
-          json
-          links {
-            entries {
-              block {
-                sys {
-                  id
+  const query = `{ 
+    blogPostCollection(limit: 1, where: {slug: "the-power-of-the-contentful-rich-text-field"}) { 
+      items { 
+        date 
+        title 
+        slug 
+        body { 
+          json 
+          links { 
+            entries { 
+              block { 
+                sys { 
+                  id 
+                  } 
+                  __typename 
+                  ... on CodeBlock { 
+                    description 
+                    language 
+                    code 
+                    } 
+                  } 
+                } 
+                assets { 
+                  block { 
+                    sys { 
+                      id 
+                    } 
+                    url 
+                    title 
+                    width 
+                    height 
+                    description 
+                  } 
                 }
-                __typename
-                ... on CodeBlock {
-                  description
-                  language
-                  code
-                }
-              }
-            }
-            assets {
-              block {
-                sys {
-                  id
-                }
-                url
-                title
-                width
-                height
-                description
-              }
-            }
-          }
-        }
-      }
-    }
-  }`;
+              } 
+            } 
+          } 
+        } 
+      }`;
 
   // Construct the fetch options
   const fetchUrl = `https://graphql.contentful.com/content/v1/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}`;

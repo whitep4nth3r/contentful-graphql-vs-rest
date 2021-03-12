@@ -90,6 +90,24 @@ export async function getStaticProps() {
         excerpt
         tags
         externalUrl
+        author {
+          name
+          description
+          gitHubUsername
+          twitchUsername
+          twitterUsername
+          websiteUrl
+          image {
+            sys {
+              id
+            }
+            url
+            title
+            width
+            height
+            description
+          }
+        }
         body {
           json
           links {
