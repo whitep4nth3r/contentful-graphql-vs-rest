@@ -1,6 +1,4 @@
-# Contentful GraphQL vs REST with JS SDK in Next.js: fetching and rendering linked assets in the Rich Text field in two ways
-
-If you're using the Contentful Rich Text field in your content model, use this example code to check out how you can render linked assets inside the Rich Text field using both the REST API with JavaScript SDK and GraphQL API.
+# Resolving linked entries and assets in Contentful
 
 ## To see examples of the different raw responses in JSON from the REST API and the GraphQL API, click on the links below
 
@@ -131,7 +129,7 @@ For example, in the case of the `author`:
 }
 ```
 
-To get the data for the linked entries in the `items` array in this example from the REST API, you would cross-reference the `items[0].fields.author.sys.id` with the `includes["Entry"]` array, find the item in the array that has the `id` that matches, and resolve the data from there.
+To resolve the data for the linked entries in the `items` array in this example from the REST API, you would cross-reference the `items[0].fields.author.sys.id` with the `includes["Entry"]` array, find the item in the array that has the `id` that matches, and resolve the data from there.
 
 You can also use a Contentful SDK, such as the [JavaScript SDK](https://www.contentful.com/developers/docs/javascript/sdks/), which will resolve all of the linked entries and assets for you!
 
@@ -211,6 +209,10 @@ If your `blogPost` had another top level reference, say a `heroBanner`:
 Regardless of the `include` depth you specify, the SDK, which uses the `contentful-resolve-response` package, which link all entries and assets that are returned in the `includes` response.
 
 [Read more about the include param on the Contentful docs](https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/links)
+
+## Contentful GraphQL vs REST with JS SDK in Next.js: fetching and rendering linked assets in the Rich Text field in two ways
+
+If you're using the Contentful Rich Text field in your content model, use this example code to check out how you can render linked assets inside the Rich Text field using both the REST API with JavaScript SDK and GraphQL API.
 
 ## REST API Response: Rendering the Rich Text field
 
