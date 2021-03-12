@@ -290,45 +290,69 @@ The code for the GraphQL API uses the [Fetch API](https://developer.mozilla.org/
  */
 
 export async function getStaticProps() {
-  const query = `{ 
-    blogPostCollection(limit: 1, where: {slug: "the-power-of-the-contentful-rich-text-field"}) { 
-      items { 
-        date 
-        title 
-        slug 
-        body { 
-          json 
-          links { 
-            entries { 
-              block { 
-                sys { 
-                  id 
-                  } 
-                  __typename 
-                  ... on CodeBlock { 
-                    description 
-                    language 
-                    code 
-                    } 
-                  } 
-                } 
-                assets { 
-                  block { 
-                    sys { 
-                      id 
-                    } 
-                    url 
-                    title 
-                    width 
-                    height 
-                    description 
-                  } 
+  const query = `{
+    blogPostCollection(limit: 1, where: {slug: "the-power-of-the-contentful-rich-text-field"}) {
+      items {
+        sys {
+          id
+        }
+        date
+        title
+        slug
+        excerpt
+        tags
+        externalUrl
+        author {
+          name
+          description
+          gitHubUsername
+          twitchUsername
+          twitterUsername
+          websiteUrl
+          image {
+            sys {
+              id
+            }
+            url
+            title
+            width
+            height
+            description
+          }
+        }
+        body {
+          json
+          links {
+            entries {
+              block {
+                sys {
+                  id
                 }
-              } 
-            } 
-          } 
-        } 
-      }`;
+                __typename
+                ... on CodeBlock {
+                  description
+                  language
+                  code
+                }
+              }
+            }
+            assets {
+              block {
+                sys {
+                  id
+                }
+                url
+                title
+                width
+                height
+                description
+              }
+            }
+          }
+        }
+      }
+    }
+  }`;
 
   // Construct the fetch options
   const fetchUrl = `https://graphql.contentful.com/content/v1/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}`;
