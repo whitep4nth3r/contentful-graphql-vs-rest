@@ -2,7 +2,7 @@
 
 If you're using the Contentful Rich Text field in your content model, use this example code to check out how you can render linked assets inside the Rich Text field using both the REST API with JavaScript SDK and GraphQL API.
 
-## To see examples of the different raw responses in JSON from REST, REST with SDK and GraphQL, click on the links below
+## To see examples of the different raw responses in JSON from the REST API and the GraphQL API, click on the links below
 
 ### [View REST raw response](example_responses/rest_raw.json)
 
@@ -12,99 +12,207 @@ Via the curl request:
 https://cdn.contentful.com/spaces/{{spaceId}}/environments/master/entries?access_token={{accessToken}}&content_type=blogPost&include=10&fields.slug=the-power-of-the-contentful-rich-text-field
 ```
 
-### [View REST with SDK response](example_responses/rest_with_sdk.json)
-
 [⏭ Skip to REST API example](#rest-api)
 
 ### [View GraphQL response](example_responses/graphql.json)
 
 [⏭ Skip to GraphQL API example](#graphql-api)
 
----
+## The Content Model
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-Fork this repository to your GitHub account, and clone it to your local machine using git or the GitHub CLI.
-
-Install dependencies:
-
-```bash
-npm install
-# or
-yarn install
-```
-
-At the root of your project, create an `.env.local` file and copy the contents from `.env.local.example`. This will provide you with a connection to an example Contentful space. [You can view the live example website for this space here.](https://nextjs-contentful-blog-starter.vercel.app/)
-
-## Run the development server
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-## Making the API calls
-
-Example code for the GraphQL API can be found in [pages/graphql](https://github.com/whitep4nth3r/contentful-graphql-vs-rest/blob/main/pages/graphql.js).
-
-Example code for the REST API can be found in [pages/rest](https://github.com/whitep4nth3r/contentful-graphql-vs-rest/blob/main/pages/rest.js).
-
-API calls are executed at build time in `getStaticProps()` on each page. Read more about [getStaticProps() in Next.js.](https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation)
-
-Both code examples use [@contentful/rich-text-react-renderer](https://www.npmjs.com/package/@contentful/rich-text-react-renderer) to render the Rich Text field nodes to React components.
+screenshot
 
 ## REST API
 
-The code for the REST API uses the [JavaScript Contentful SDK](https://www.contentful.com/developers/docs/javascript/sdks/):
+The raw response from the REST API for a single blog post contains the following top level properties and nodes in a flat structure.
 
-### Why use an SDK?
-
-The raw REST API response returns references to entries and assets in your Rich Text field, but does not bundle the data of those entries and assets with the response. The SDK does all the linking and data-fetching work for you via the `include` parameter in the request.
-
-[Read more about the include param on the Contentful docs](https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/links)
-
-The `include` parameter is not applicable while retrieving a single entry; this is why this example uses `getEntries()` to demonstrate its use.
-
-```js
-import { createClient } from "contentful";
-```
-
-## REST API: Fetching the data
-
-```js
-export async function getStaticProps() {
-  // Create the client with credentials
-  const client = createClient({
-    space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
-    accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN,
-  });
-
-  // Query the client with the following options
-  const query = await client
-    .getEntries({
-      content_type: "blogPost",
-      limit: 1,
-      include: 10,
-      "fields.slug": "the-power-of-the-contentful-rich-text-field",
-    })
-    .then((entry) => entry)
-    .catch(console.error);
-
-  // As we are using getEntries we will receive an array
-  // The first item in the items array is passed to the page props
-  // as a post
-  return {
-    props: {
-      post: query.items[0],
-    },
-  };
+```json
+{
+  "sys": {
+    "type": "Array"
+  },
+  "total": 1,
+  "skip": 0,
+  "limit": 100,
+  "items": [...],
+  "includes: [...]
 }
 ```
 
-## REST API: Rendering the Rich Text field
+## `items`
+
+`items` contains the `fields` node, containing one object comprised of all the fields that make up our `blogPost` content type:
+
+```json
+"items": [
+  {
+    "sys": {...},
+    "fields": {
+      "date": "...",
+      "title": "...",
+      "slug": "...",
+      "author": {
+        // This is a "Link" - and contains only a reference to the Author entry
+        "sys": {
+          "type": "Link",
+          "linkType": "Entry",
+          "id": "556w2eIsidZbHaFES083x0"
+        }
+      },
+      "excerpt": "...",
+      "tags": ["..."],
+      "body": {
+        //...
+      }
+    }
+  }
+]
+```
+
+## `includes`
+
+`includes` contains two nodes of complete data:
+
+`"Entry"` for all referenced entries in `items` (such as the author)
+`"Asset"` for all referenced assets in `items` (such as images)
+
+For example, in the case of the `author`:
+
+```json
+"includes": {
+ "Entry": [
+  {
+    "sys": {
+      "space": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Space",
+          "id": "84zl5qdw0ore"
+        }
+      },
+      "id": "556w2eIsidZbHaFES083x0",
+      "type": "Entry",
+      "createdAt": "2021-03-02T14:05:17.499Z",
+      "updatedAt": "2021-03-02T15:11:34.145Z",
+      "environment": {
+        "sys": {
+          "id": "master",
+          "type": "Link",
+          "linkType": "Environment"
+        }
+      },
+      "revision": 3,
+      "contentType": {
+        "sys": {
+          "type": "Link",
+          "linkType": "ContentType",
+          "id": "person"
+        }
+      },
+      "locale": "en-US"
+    },
+    "fields": {
+      "image": {
+        "sys": {
+          "type": "Link",
+          "linkType": "Asset",
+          "id": "rImaN1nOhnl7aJ4OYwbOp"
+        }
+      },
+      "name": "Salma Alam-Naylor",
+      "description": "This is the author description",
+      "twitterUsername": "whitep4nth3r",
+      "gitHubUsername": "whitep4nth3r",
+      "twitchUsername": "whitep4nth3r",
+      "websiteUrl": "https://whitep4nth3r.com"
+    }
+  },
+ ]
+}
+```
+
+To get the data for the linked entries in the `items` array in this example from the REST API, you would cross-reference the `items[0].fields.author.sys.id` with the `includes["Entry"]` array, find the item in the array that has the `id` that matches, and resolve the data from there.
+
+You can also use a Contentful SDK, such as the [JavaScript SDK](https://www.contentful.com/developers/docs/javascript/sdks/), which will resolve all of the linked entries and assets for you!
+
+Under the hood, the JavaScript SDK uses the [`contentful-resolve-response`](https://github.com/contentful/contentful-resolve-response) package, which converts the raw nodes into a nice rich tree of data.
+
+The one limitation is that the `contentful-resolve-response` will resolve linked entries up to a maximum of 10 levels deep.
+
+_Note: The `include` parameter is not applicable while retrieving a single entry; this is why this example uses `getEntries()` to demonstrate its use._
+
+You can specify the depth of the resolved tree using the `include` param in the request to the API, either as a parameter on the GET request URL, like this:
+
+```curl
+https://cdn.contentful.com/spaces/{{spaceId}}/environments/master/entries?access_token={{accessToken}}&content_type=blogPost&fields.slug=the-power-of-the-contentful-rich-text-field&include=10
+```
+
+or via the call to the JavaScript SDK, like this:
+
+```javascript
+const post = await client
+  .getEntries({
+    content_type: "blogPost",
+    limit: 1,
+    include: 10,
+    "fields.slug": "the-power-of-the-contentful-rich-text-field",
+  })
+  .then((entry) => entry)
+  .catch(console.error);
+```
+
+Both examples above are making the same request to the Contentful API - except the SDK example is resolving your linked entries as part of the process using `contentful-resolve-response`.
+
+## How the `include` parameter affects the length of the `includes` response
+
+Say you have a blog post, which has a reference to an author, which has a reference to a location.
+
+To visualise this in an object graph:
+
+```json
+{
+  "blogPost": {
+    //...
+    "author": {
+      //...
+      "location": {
+        //...
+      }
+    }
+  }
+}
+```
+
+If you specify `includes=1` in your request, your `includes` response will contain one item in this example, the `author` object (1 level deep).
+
+If you specify `includes=2` in your request, your `includes` response will contain two items, the `author` object and the `location` object. (2 levels deep).
+
+If your `blogPost` had another top level reference, say a `heroBanner`:
+
+```json
+{
+  "blogPost": {
+    //...
+    "heroBanner": {
+      //...
+    },
+    "author": {
+      //...
+      "location": {
+        //...
+      }
+    }
+  }
+}
+```
+
+`includes=1` would return both the `author` and `heroBanner` inside the `includes` array.
+
+Regardless of the `include` depth you specify, the SDK, which uses the `contentful-resolve-response` package, which link all entries and assets that are returned in the `includes` response.
+
+[Read more about the include param on the Contentful docs](https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/links)
+
+## REST API Response: Rendering the Rich Text field
 
 ```js
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
@@ -315,3 +423,41 @@ export default function GraphQL(props) {
   return <main>{documentToReactComponents(post.body.json, renderOptions(post.body.links))}</main>;
 }
 ```
+
+---
+
+## Running the code on your local machine
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Getting Started
+
+Fork this repository to your GitHub account, and clone it to your local machine using git or the GitHub CLI.
+
+Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+At the root of your project, create an `.env.local` file and copy the contents from `.env.local.example`. This will provide you with a connection to an example Contentful space. [You can view the live example website for this space here.](https://nextjs-contentful-blog-starter.vercel.app/)
+
+## Run the development server
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+## Making the API calls
+
+Example code for the GraphQL API can be found in [pages/graphql](https://github.com/whitep4nth3r/contentful-graphql-vs-rest/blob/main/pages/graphql.js).
+
+Example code for the REST API can be found in [pages/rest](https://github.com/whitep4nth3r/contentful-graphql-vs-rest/blob/main/pages/rest.js).
+
+API calls are executed at build time in `getStaticProps()` on each page. Read more about [getStaticProps() in Next.js.](https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation)
+
+Both code examples use [@contentful/rich-text-react-renderer](https://www.npmjs.com/package/@contentful/rich-text-react-renderer) to render the Rich Text field nodes to React components.

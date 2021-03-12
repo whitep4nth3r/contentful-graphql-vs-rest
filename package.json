@@ -1,5 +1,6 @@
 {
   "name": "contentful-graphql-vs-rest",
+  "author": "Salma Alam-Naylor",
   "version": "0.1.0",
   "private": true,
   "scripts": {
