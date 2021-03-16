@@ -129,7 +129,7 @@ For example, in the case of the `author`:
 }
 ```
 
-To resolve the data for the linked entries in the `items` array in this example from the REST API, you would cross-reference the `items[0].fields.author.sys.id` with the `includes["Entry"]` array, find the item in the array that has the `id` that matches, and resolve the data from there.
+To resolve the data for the linked entries in the `items` array in this example from the REST API, you could cross-reference the `items[0].fields.author.sys.id` with the `includes["Entry"]` array, find the item in the array that has the `id` that matches, and resolve the data from there.
 
 You can also use a Contentful SDK, such as the [JavaScript SDK](https://www.contentful.com/developers/docs/javascript/sdks/), which will resolve all of the linked entries and assets for you!
 
@@ -163,7 +163,7 @@ Both examples above are making the same request to the Contentful API - except t
 
 ## How the `include` parameter affects the length of the `includes` response
 
-Say you have a blog post, which has a reference to an author, which has a reference to a location.
+Say you have a blog post, which has a reference to an author, which has a reference to a team.
 
 To visualise this in an object graph:
 
@@ -175,7 +175,7 @@ To visualise this in an object graph:
       //...
       "author": {
         //...
-        "location": {
+        "team": {
           //...
         }
       }
@@ -186,7 +186,7 @@ To visualise this in an object graph:
 
 If you specify `includes=1` in your request, your `includes` response will contain one item in this example, the `author` object (1 level deep).
 
-If you specify `includes=2` in your request, your `includes` response will contain two items, the `author` object and the `location` object. (2 levels deep).
+If you specify `includes=2` in your request, your `includes` response will contain two items, the `author` object and the `team` object. (2 levels deep).
 
 If your `blogPost` had another top level reference, say a `heroBanner`:
 
@@ -199,7 +199,7 @@ If your `blogPost` had another top level reference, say a `heroBanner`:
     },
     "author": {
       //...
-      "location": {
+      "team": {
         //...
       }
     }
@@ -381,7 +381,7 @@ export async function getStaticProps() {
 
 ## GraphQL API: Rendering the Rich Text field
 
-The key difference in the GraphQL API compared to the REST API is that linked entry nodes are available under `body.links` as opposed to their data being returned in line with with the other body nodes.
+The key difference in the GraphQL API compared to the REST API is that linked entry nodes are available under `body.links` as opposed to their data being returned in line with with the other body nodes — after being processed with the SDK.
 
 In order to target asset and entry data when rendering `BLOCKS.EMBEDDED_ENTRY` and `BLOCKS.EMBEDDED_ASSET` with `documentToReactComponents`, we can create an assetBlockMap (id: asset) and entryBlockMap (id: entry) to store data we can reference by ID.
 
