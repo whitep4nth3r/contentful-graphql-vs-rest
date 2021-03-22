@@ -3,9 +3,6 @@ import { createClient } from "contentful";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 
-//todo - is the sdk doing magic with the initial API response?
-// or is the raw API response formatted with embedded data for links as it is?
-
 // Create a bespoke renderOptions object to target BLOCKS.EMBEDDED_ENTRY (linked entries e.g. code blocks)
 // and BLOCKS.EMBEDDED_ASSET (linked assets e.g. images)
 
@@ -18,6 +15,20 @@ const renderOptions = {
           <pre>
             <code>{node.data.target.fields.code}</code>
           </pre>
+        );
+      }
+
+      if (node.data.target.sys.contentType.sys.id === "videoEmbed") {
+        return (
+          <iframe
+            src={node.data.target.fields.embedUrl}
+            height="100%"
+            width="100%"
+            frameBorder="0"
+            scrolling="no"
+            title={node.data.target.fields.title}
+            allowFullScreen={true}
+          />
         );
       }
     },
