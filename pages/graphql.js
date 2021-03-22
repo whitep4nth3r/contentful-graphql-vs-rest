@@ -26,7 +26,7 @@ function renderOptions(links) {
         // find the entry in the entryBlockMap by ID
         const entry = entryBlockMap.get(node.data.target.sys.id);
 
-        // render the entry as needed
+        // render the entries as needed
         if (entry.__typename === "CodeBlock") {
           return (
             <pre>
@@ -34,7 +34,25 @@ function renderOptions(links) {
             </pre>
           );
         }
+
+        // render the entries as needed by looking at the __typename
+        // referenced in the GraphQL query
+
+        if (entry.__typename === "VideoEmbed") {
+          return (
+            <iframe
+              src={entry.embedUrl}
+              height="100%"
+              width="100%"
+              frameBorder="0"
+              scrolling="no"
+              title={entry.title}
+              allowFullScreen={true}
+            />
+          );
+        }
       },
+
       [BLOCKS.EMBEDDED_ASSET]: (node, next) => {
         // find the asset in the assetBlockMap by ID
         const asset = assetBlockMap.get(node.data.target.sys.id);
@@ -121,6 +139,10 @@ export async function getStaticProps() {
                   description
                   language
                   code
+                }
+                ... on VideoEmbed {
+                  embedUrl
+                  title
                 }
               }
             }
