@@ -1,13 +1,22 @@
 import Head from "next/head";
 import { createClient } from "contentful";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS } from "@contentful/rich-text-types";
+import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 
-// Create a bespoke renderOptions object to target BLOCKS.EMBEDDED_ENTRY (linked entries e.g. code blocks)
+// Create a bespoke renderOptions object to target BLOCKS.EMBEDDED_ENTRY (linked block entries e.g. code blocks)
+// INLINES.EMBEDDED_ENTRY (linked inline entries e.g. a reference to another blog post)
 // and BLOCKS.EMBEDDED_ASSET (linked assets e.g. images)
 
 const renderOptions = {
   renderNode: {
+    [INLINES.EMBEDDED_ENTRY]: (node, children) => {
+      // target the contentType of the EMBEDDED_ENTRY to display as you need
+      if (node.data.target.sys.contentType.sys.id === "blogPost") {
+        return (
+          <a href={`/blog/${node.data.target.fields.slug}`}>{node.data.target.fields.title}</a>
+        );
+      }
+    },
     [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
       // target the contentType of the EMBEDDED_ENTRY to display as you need
       if (node.data.target.sys.contentType.sys.id === "codeBlock") {

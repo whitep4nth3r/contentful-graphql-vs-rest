@@ -1,30 +1,44 @@
 import Head from "next/head";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS } from "@contentful/rich-text-types";
+import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 
 // Create a bespoke renderOptions object to target BLOCKS.EMBEDDED_ENTRY (linked entries e.g. code blocks)
 // and BLOCKS.EMBEDDED_ASSET (linked assets e.g. images)
 
 function renderOptions(links) {
-  // create an asset block map
-  const assetBlockMap = new Map();
+  // create an asset map
+  const assetMap = new Map();
   // loop through the assets and add them to the map
   for (const asset of links.assets.block) {
-    assetBlockMap.set(asset.sys.id, asset);
+    assetMap.set(asset.sys.id, asset);
   }
 
-  // create an entry block map
-  const entryBlockMap = new Map();
-  // loop through the assets and add them to the map
+  // create an entry map
+  const entryMap = new Map();
+  // loop through the block linked entries and add them to the map
   for (const entry of links.entries.block) {
-    entryBlockMap.set(entry.sys.id, entry);
+    entryMap.set(entry.sys.id, entry);
+  }
+
+  // loop through the inline linked entries and add them to the map
+  for (const entry of links.entries.inline) {
+    entryMap.set(entry.sys.id, entry);
   }
 
   return {
     renderNode: {
+      [INLINES.EMBEDDED_ENTRY]: (node, children) => {
+        // find the entry in the entryMap by ID
+        const entry = entryMap.get(node.data.target.sys.id);
+
+        // render the entries as needed
+        if (entry.__typename === "BlogPost") {
+          return <a href={`/blog/${entry.slug}`}>{entry.title}</a>;
+        }
+      },
       [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
-        // find the entry in the entryBlockMap by ID
-        const entry = entryBlockMap.get(node.data.target.sys.id);
+        // find the entry in the entryMap by ID
+        const entry = entryMap.get(node.data.target.sys.id);
 
         // render the entries as needed
         if (entry.__typename === "CodeBlock") {
@@ -54,8 +68,8 @@ function renderOptions(links) {
       },
 
       [BLOCKS.EMBEDDED_ASSET]: (node, next) => {
-        // find the asset in the assetBlockMap by ID
-        const asset = assetBlockMap.get(node.data.target.sys.id);
+        // find the asset in the assetMap by ID
+        const asset = assetMap.get(node.data.target.sys.id);
 
         // render the asset accordingly
         return (
@@ -130,6 +144,16 @@ export async function getStaticProps() {
           json
           links {
             entries {
+              inline {
+                sys {
+                  id
+                }
+                __typename
+                ... on BlogPost {
+                  title
+                  slug
+                }
+              }
               block {
                 sys {
                   id
